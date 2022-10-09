@@ -4,3 +4,5 @@
 /*.ppm
 /*.png
 /*.txt
+
+!/sample.png
