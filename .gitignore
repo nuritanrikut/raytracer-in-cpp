@@ -5,4 +5,5 @@
 /*.png
 /*.txt
 
+!/CMakeLists.txt
 !/sample.png
