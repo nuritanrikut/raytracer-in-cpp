@@ -7,9 +7,9 @@
 
 std::ostream &operator<<( std::ostream &out, const vec3_t &v )
 {
-    out << '(' << std::fixed << std::setprecision( 8 ) << v.x;
-    out << ", " << std::fixed << std::setprecision( 8 ) << v.y;
-    out << ", " << std::fixed << std::setprecision( 8 ) << v.z << ')';
+    out << '(' << std::fixed << std::setprecision( 4 ) << v.x;
+    out << ", " << std::fixed << std::setprecision( 4 ) << v.y;
+    out << ", " << std::fixed << std::setprecision( 4 ) << v.z << ')';
     return out;
 }
 

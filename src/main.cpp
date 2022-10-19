@@ -102,8 +102,8 @@ color_t ray_color( int i, int j, const ray_t &r, const hittable_t &world, int de
         if( rec.material->scatter( r, rec, rng, attenuation, scattered ) )
         {
             auto recursed_color = ray_color( i, j, scattered, world, depth - 1, rng );
-            // std::cerr << "> Scatter " << i << ' ' << j << " dir=" << r.direction() << " color= " << attenuation << ", "
-            //           << recursed_color << ", " << ( attenuation * recursed_color ) << std::endl;
+            // std::cerr << "> Scatter " << i << ' ' << j << " dir=" << r.direction() << " attenuation=" << attenuation << " recursed_color="
+            //           << recursed_color << " out=" << ( attenuation * recursed_color ) << std::endl;
             return attenuation * recursed_color;
         }
 

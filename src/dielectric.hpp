@@ -1,7 +1,5 @@
 #pragma once
 
-#include <fmt/format.h>
-
 #include "material.hpp"
 #include "utils.hpp"
 
@@ -34,19 +32,20 @@ public:
         const double refl = reflectance( cos_theta, refraction_ratio );
         const bool should_reflect = refl > t;
 
-        // std::cerr << fmt::format( "> reflectance unit_direction( {:+.8}, {:+.8}, {:+.8} ) rec.normal( {:+.8}, {:+.8}, {:+.8} ) d {:+.8} cos_theta {:+.8} refraction_ratio {:+.8} refl {:+.8} t {:+.8}",
-        //                           (-unit_direction).x,
-        //                           (-unit_direction).y,
-        //                           (-unit_direction).z,
-        //                           rec.normal.x,
-        //                           rec.normal.y,
-        //                           rec.normal.z,
-        //                           d,
-        //                           cos_theta,
-        //                           refraction_ratio,
-        //                           refl,
-        //                           t )
-        //           << std::endl;
+        // fprintf( stderr,
+        //          "> reflectance unit_direction( %+.4lf, %+.4lf, %+.4lf ) rec.normal( %+.4lf, %+.4lf, "
+        //          "%+.4lf ) d %+.4lf cos_theta %+.4lf refraction_ratio %+.4lf refl %+.4lf t %+.4lf\n",
+        //          ( -unit_direction ).x,
+        //          ( -unit_direction ).y,
+        //          ( -unit_direction ).z,
+        //          rec.normal.x,
+        //          rec.normal.y,
+        //          rec.normal.z,
+        //          d,
+        //          cos_theta,
+        //          refraction_ratio,
+        //          refl,
+        //          t );
 
         vec3_t direction;
 
