@@ -19,6 +19,7 @@ std::ostream &operator<<( std::ostream &out, const vec3_t &v );
 void write_color( std::ostream &out, const color_t &pixel_color, int samples_per_pixel );
 
 vec3_t operator+( const vec3_t &a, const vec3_t &b );
+vec3_t &operator+=( vec3_t &a, const vec3_t &b );
 vec3_t operator-( const vec3_t &a, const vec3_t &b );
 vec3_t operator-( const vec3_t &v );
 vec3_t operator*( const vec3_t &a, const vec3_t &b );

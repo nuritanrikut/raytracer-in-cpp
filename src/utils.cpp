@@ -3,14 +3,21 @@
 
 #include "utils.hpp"
 
-random_number_generator_t::random_number_generator_t() : div( 1000 ), mod( 1000000 ), state( 675248 )
+random_number_generator_t::random_number_generator_t() : div( 1000 ), mod( 1000000 ), state( 675248 ) { }
+
+random_number_generator_t::random_number_generator_t( int32_t s, int32_t d, int32_t m ) : div( d ), mod( m ), state( s )
 {
-    srand( 1 );
 }
 
-unsigned long random_number_generator_t::next()
+random_number_generator_t random_number_generator_t::clone() const
 {
-    return state = state * state / div % mod;
+    return random_number_generator_t{ state, div, mod };
+}
+
+int32_t random_number_generator_t::next()
+{
+    state = ( ( int64_t( state ) * state ) / div ) % mod;
+    return state;
 }
 
 double random_number_generator_t::random_double()
@@ -19,9 +26,9 @@ double random_number_generator_t::random_double()
     // return rand() / ( RAND_MAX + 1.0 );
 
     // use this version if you want repeatable sequence of numbers
-    auto t1 = next();
-    auto t2 = next();
-    return ( t1 * mod + t2 ) / double( mod ) / double( mod );
+    double t1 = next();
+    double t2 = next();
+    return ( ( t1 * mod + t2 ) / double( mod ) ) / double( mod );
 }
 
 double random_number_generator_t::random_range( double min, double max )
@@ -44,9 +51,8 @@ vec3_t random_number_generator_t::random_in_unit_sphere()
     while( true )
     {
         auto p = random_vec3_range( -1.0, 1.0 );
-        if( length_squared( p ) >= 1.0 )
-            continue;
-        return p;
+        if( length_squared( p ) < 1.0 )
+            return p;
     }
 }
 
@@ -60,9 +66,8 @@ vec3_t random_number_generator_t::random_in_unit_disk()
     while( true )
     {
         auto p = vec3_t{ random_range( -1.0, 1.0 ), random_range( -1.0, 1.0 ), 0.0 };
-        if( length_squared( p ) >= 1.0 )
-            continue;
-        return p;
+        if( length_squared( p ) < 1.0 )
+            return p;
     }
 }
 

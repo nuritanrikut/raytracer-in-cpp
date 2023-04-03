@@ -15,5 +15,5 @@ set(SOURCES
 
 add_executable(raytracer ${SOURCES})
 
-target_link_libraries(raytracer PRIVATE OpenMP::OpenMP_CXX pthread)
+target_link_libraries(raytracer PRIVATE OpenMP::OpenMP_CXX pthread tbb)
 target_link_libraries(raytracer PUBLIC OpenMP::OpenMP_CXX)

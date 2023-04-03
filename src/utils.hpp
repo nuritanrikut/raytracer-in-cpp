@@ -16,6 +16,9 @@ class random_number_generator_t
 {
 public:
     random_number_generator_t();
+    random_number_generator_t(int32_t s, int32_t d, int32_t m);
+
+    random_number_generator_t clone() const;
 
     double random_double();
     double random_range( double min, double max );
@@ -28,12 +31,12 @@ public:
     vec3_t random_in_unit_disk();
 
 private:
-    unsigned long next();
+    int32_t next();
 
 private:
-    unsigned long state;
-    unsigned long div;
-    unsigned long mod;
+    int32_t state;
+    int32_t div;
+    int32_t mod;
 };
 
 double clamp( double v, double min, double max );

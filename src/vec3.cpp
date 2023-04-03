@@ -1,15 +1,17 @@
 #include "vec3.hpp"
 
 #include <cmath>
+#include <iostream>
 #include <iomanip>
 
 #include "utils.hpp"
 
 std::ostream &operator<<( std::ostream &out, const vec3_t &v )
 {
-    out << '(' << std::fixed << std::setprecision( 4 ) << v.x;
-    out << ", " << std::fixed << std::setprecision( 4 ) << v.y;
-    out << ", " << std::fixed << std::setprecision( 4 ) << v.z << ')';
+    out << '(' << std::fixed << std::setprecision( 4 ) << std::showpos << v.x;
+    out << ", " << std::fixed << std::setprecision( 4 ) << std::showpos << v.y;
+    out << ", " << std::fixed << std::setprecision( 4 ) << std::showpos << v.z << ')';
+    out << std::noshowpos;
     return out;
 }
 
@@ -21,13 +23,34 @@ void write_color( std::ostream &out, const color_t &pixel_color, int samples_per
     const auto g = sqrt( scale * pixel_color.y );
     const auto b = sqrt( scale * pixel_color.z );
 
-    out << static_cast<int>( 256 * clamp( r, 0.0, 0.999 ) ) << ' ' << static_cast<int>( 256 * clamp( g, 0.0, 0.999 ) )
-        << ' ' << static_cast<int>( 256 * clamp( b, 0.0, 0.999 ) ) << '\n';
+    int ri = int( 256 * clamp( r, 0.0, 0.999 ) );
+    int gi = int( 256 * clamp( g, 0.0, 0.999 ) );
+    int bi = int( 256 * clamp( b, 0.0, 0.999 ) );
+
+    // std::cerr << "write_color " << pixel_color
+    //           << " r " << std::fixed << std::setprecision( 4 ) << std::showpos << r 
+    //           << " g " << std::fixed << std::setprecision( 4 ) << std::showpos << g 
+    //           << " b " << std::fixed << std::setprecision( 4 ) << std::showpos << b 
+    //           << std::noshowpos
+    //           << " ri " << ri 
+    //           << " gi " << gi
+    //           << " bi " << bi
+    //           << '\n';
+
+    out << ri << ' ' << gi << ' ' << bi << '\n';
 }
 
 vec3_t operator+( const vec3_t &a, const vec3_t &b )
 {
     return vec3_t{ a.x + b.x, a.y + b.y, a.z + b.z };
+}
+
+vec3_t &operator+=( vec3_t &a, const vec3_t &b )
+{
+    a.x += b.x;
+    a.y += b.y;
+    a.z += b.z;
+    return a;
 }
 
 vec3_t operator-( const vec3_t &a, const vec3_t &b )
@@ -104,4 +127,3 @@ vec3_t unit_vector( const vec3_t &v )
 {
     return v / length( v );
 }
-

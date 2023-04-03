@@ -21,7 +21,7 @@ public:
         vec3_t reflected = reflect( unit_vector( r_in.direction() ), rec.normal );
         scattered = ray_t( rec.p, reflected + fuzz * rng.random_in_unit_sphere() );
         attenuation = albedo;
-        return ( dot( scattered.direction(), rec.normal ) > 0.0 );
+        return dot( scattered.direction(), rec.normal ) > 0.0;
     }
 
 public:
